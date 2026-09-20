@@ -1,0 +1,78 @@
+﻿OKHOTSK TRANSLATION TOOLS v0.8.23 FINAL
+======================================
+
+Финальный набор инструментов русского перевода Famicom-версии
+Hokkaidou Rensa Satsujin: Okhotsk ni Kiyu.
+
+ТРЕБОВАНИЯ
+----------
+- Python 3.10+.
+- Pillow требуется только PNG/CHR-инструментам.
+
+ПОДДЕРЖИВАЕМАЯ ИСХОДНАЯ ROM
+---------------------------
+SHA-256:
+d42f3bdea8af5c1303d567e07afdf89d72d014639e8f7b88fc7a10404bec33ba
+
+ФИНАЛЬНАЯ КОНТРОЛЬНАЯ ROM
+-------------------------
+SHA-256:
+4f3003ed002ea0b76dd243e52f479a9e22c4483d1d9411b43dbf373d26cbbdb2
+
+БЫСТРАЯ СБОРКА
+--------------
+Из корня набора:
+
+  python3 tools/build_project.py game.nes project_template/script_work.txt \
+      --ru-bpe project_template/ru_bpe.tsv \
+      --shared-translations project_template/shared_translations_full.json \
+      -o Okhotsk_RU_rebuilt.nes
+
+ПРОВЕРКА ГОТОВОЙ ROM
+--------------------
+  python3 tests/verify_full_rom.py Okhotsk_RU_rebuilt.nes
+
+ПРОВЕРКА ДИАЛОГОВОЙ РАЗМЕТКИ
+----------------------------
+  python3 tools/check_dialogue_layout.py project_template/script_work.txt \
+      --shared-translations project_template/shared_translations_full.json
+
+Финальные ограничения диалогового окна:
+- любой рисуемый символ: X < 30;
+- максимум 3 рисуемые строки на страницу;
+- 4-я нижняя строка не используется;
+- пробелы после . , : ? ! намеренно опускаются.
+
+СТРУКТУРА
+---------
+assets/            финальные и legacy-референсные CHR-шрифты
+project_template/  финальный script_work, словари и shared-переводы
+tables/            таблицы кодировки
+tools/             extractor/repacker/build/patch/reflow инструменты
+tests/             selftest и full-ROM verifier
+docs/              актуальная техническая документация
+docs/history/      история важных runtime-багов и их исправлений
+
+ВАЖНЫЕ ФАЙЛЫ
+------------
+project_template/script_work.txt
+    Финальный основной русский сценарий.
+
+project_template/shared_translations_full.json
+    Русские shared F2-потоки для финальной сборки.
+
+project_template/ru_bpe.tsv
+    Финальный BPE-словарь после безопасного reflow.
+
+tests/verify_full_rom.py
+    Проверяет pointer/F2 структуру, UI, ввод имени/пароля, телефон, title/credits,
+    blackjack, numeric glyphs, новый 0 и финальный photo-text special case.
+
+tools/check_dialogue_layout.py
+    Проверяет реальную безопасную область диалога рекурсивно через F2.
+
+ПРИМЕЧАНИЕ
+----------
+Промежуточные translation batches, smoke examples и TODO из тестовых сборок в
+финальный release-tools пакет намеренно не включены. Для воспроизводимой сборки
+достаточно project_template и текущих инструментов.

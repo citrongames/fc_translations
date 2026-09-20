@@ -1,0 +1,40 @@
+ИНСТРУМЕНТЫ FINAL — КРАТКОЕ РУКОВОДСТВО
+========================================
+
+validate_final.py
+  Структурная проверка официальной FINAL ROM. Без --allow-modified также требует
+  официальный SHA-256. С --script проверяет B0/B1/D против TXT.
+
+extract_text.py
+  Автоматически определяет original (8 PRG banks) или FINAL (16 PRG banks).
+  Для сомнительного файла можно принудительно дать --mode jp или --mode ru.
+
+insert_text.py
+  Только для расширенной FINAL-архитектуры. Repack B0, D и B1, переписывает
+  указатели/far-stubs. Не использовать на оригинальной 128 KiB ROM.
+
+repack_original.py
+  Старый безопасный relocating repacker для original 8-bank ROM. Полезен для
+  исследования исходника и маленьких переводов. Требует layout_check.py.
+
+enemy_names.py
+  Отдельная 27-entry таблица $5B. TSV можно редактировать вручную, но общий
+  пул ограничен 210 байтами.
+
+credits_tool.py
+  Семь страниц staff-roll в фиксированном 131-byte блоке. Вставка не должна
+  превышать 131 байт.
+
+extract_chr.py / insert_chr.py
+  Универсальный NES 2bpp CHR round-trip. Требует Pillow.
+
+Проверенные no-op round trips в FINAL-пакете:
+  text extract -> insert      byte-identical
+  canonical script -> insert  byte-identical
+  CHR bank 2 extract->insert  byte-identical
+  enemy names extract->insert byte-identical
+  credits extract->insert     byte-identical
+
+selftest_final.py
+  Запускает validate_final и четыре byte-identical round-trip теста подряд.
+  Требует Pillow, потому что проверяет CHR PNG round-trip.

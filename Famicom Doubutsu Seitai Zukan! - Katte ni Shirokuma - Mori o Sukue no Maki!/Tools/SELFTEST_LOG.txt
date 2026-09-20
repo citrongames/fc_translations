@@ -1,0 +1,22 @@
+PASS
+SHA256: 75005f885f4d040dcc1a0e0b521ef12eb5d466815735ebe75a18c17fa33db16b
+B1 far stubs: 898/898
+Enemy names: 27/27
+Ending loop: OK
+Credits terminator: OK
+ROM/script: B0 153/153, B1 898/898, D 91/91
+Wrote /tmp/tmphh5_0dm4/script.txt; entries=1142; mode=ru
+Wrote /tmp/tmphh5_0dm4/text.nes
+B1 unique strings: 877; external banks used: 3
+SHA256: 75005f885f4d040dcc1a0e0b521ef12eb5d466815735ebe75a18c17fa33db16b
+/tmp/tmphh5_0dm4/chr/chr_bank_02.png
+Wrote /tmp/tmphh5_0dm4/chr.nes; bank=2; SHA256=75005f885f4d040dcc1a0e0b521ef12eb5d466815735ebe75a18c17fa33db16b
+/tmp/tmphh5_0dm4/enemy.tsv
+Wrote /tmp/tmphh5_0dm4/enemy.nes; pool 202/210 bytes
+/tmp/tmphh5_0dm4/credits.txt
+Wrote /tmp/tmphh5_0dm4/credits.nes; 131/131 bytes
+PASS text extract->insert 75005f885f4d040dcc1a0e0b521ef12eb5d466815735ebe75a18c17fa33db16b
+PASS CHR bank2 extract->insert 75005f885f4d040dcc1a0e0b521ef12eb5d466815735ebe75a18c17fa33db16b
+PASS enemy names extract->insert 75005f885f4d040dcc1a0e0b521ef12eb5d466815735ebe75a18c17fa33db16b
+PASS credits extract->insert 75005f885f4d040dcc1a0e0b521ef12eb5d466815735ebe75a18c17fa33db16b
+ALL FINAL SELF-TESTS PASS

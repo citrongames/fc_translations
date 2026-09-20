@@ -1,0 +1,161 @@
+# RUSSIAN PUNCTUATION (v9): E1=. E2=, E3=! E4=? E5=-
+# Murder Club / マーダークラブ JBハロルドの事件簿 (Famicom)
+# Формат: BYTE=TEXT
+# 00 — терминатор, скрипты обрабатывают его отдельно.
+#
+# Низкие байты 05-0D — словарные сокращения, найденные в тексте.
+# Они разворачиваются в читаемый японский текст при извлечении
+# и снова автоматически сжимаются при вставке.
+# IMPORTANT CHR NOTE (v5):
+# Эта .tbl описывает только байты ОСНОВНОГО ТЕКСТОВОГО ПОТОКА.
+# Physical CHR tiles $80-$BF = отдельный password-набор.
+# Physical CHR tiles $C0-$FF = титульная графика/название.
+# Не добавляйте их сюда как обычные text-byte mappings без изменения движка.
+#
+
+# RUSSIAN FONT MAPPING (v6, user-confirmed):
+# $80-$A0 = А-Б-...-Я, including Ё after Е
+# $C0-$E0 = а-б-...-я, including ё after е
+# These bytes now refer to the user's redrawn Russian glyphs in the MAIN TEXT FONT.
+# Japanese mappings formerly occupying these ranges are intentionally replaced.
+#
+00=<END>
+05=J.B.
+06=しりません
+07=わたし
+08=ません
+09=います
+0A=です
+0B=ビル
+0C=ました
+0D=・・・
+
+80=А
+81=Б
+82=В
+83=Г
+84=Д
+85=Е
+86=Ё
+87=Ж
+88=З
+89=И
+8A=Й
+8B=К
+8C=Л
+8D=М
+8E=Н
+8F=О
+90=П
+91=Р
+92=С
+93=Т
+94=У
+95=Ф
+96=Х
+97=Ц
+98=Ч
+99=Ш
+9A=Щ
+9B=Ъ
+9C=Ы
+9D=Ь
+9E=Э
+9F=Ю
+A0=Я
+A1=め
+A2=も
+A3=や
+A4=ゆ
+A5=よ
+A6=ら
+A7=り
+A8=る
+A9=れ
+AA=ろ
+AB=わ
+AC=を
+AD=ん
+AE=゛
+AF=゜
+B0=っ
+B1=ゃ
+B2=ゅ
+B3=ょ
+B4=0
+B5=1
+B6=2
+B7=3
+B8=4
+B9=5
+BA=6
+BB=7
+BC=8
+BD=9
+BE=O
+BF=。
+
+C0=а
+C1=б
+C2=в
+C3=г
+C4=д
+C5=е
+C6=ё
+C7=ж
+C8=з
+C9=и
+CA=й
+CB=к
+CC=л
+CD=м
+CE=н
+CF=о
+D0=п
+D1=р
+D2=с
+D3=т
+D4=у
+D5=ф
+D6=х
+D7=ц
+D8=ч
+D9=ш
+DA=щ
+DB=ъ
+DC=ы
+DD=ь
+DE=э
+DF=ю
+E0=я
+E1=.
+E2=,
+E3=!
+E4=?
+E5=-
+E6=ラ
+E7=リ
+E8=ル
+E9=レ
+EA=ロ
+EB=ワ
+EC=ン
+ED=A
+EE=B
+EF=C
+F0=ッ
+F1=ャ
+F2=ュ
+F3=ョ
+F4=J
+F5=<CURSOR_DOWN>
+F6=「
+F7=」
+F8=<BLOCK_A>
+F9=<BLOCK_B>
+FA=<CURSOR_RIGHT>
+FB=H
+FC=ー
+FD=<ICON_LR>
+FE=？
+FF= 

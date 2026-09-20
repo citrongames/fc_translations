@@ -1,0 +1,278 @@
+﻿group	file_offset	prg_offset	capacity	display_limit	columns	frame_mode	original_japanese	translation
+password	03654	03644	19	20	10		パスワードを きろくしてください	ЗАПИШИТЕ  ПАРОЛЬ
+password	03668	03658	22	20	10		パスワードを にゅうりょくしてください	ВВЕДИТЕ   ПАРОЛЬ
+password	0367F	0366F	16	20	10		パスワードが ちがいます	НЕВЕРНЫЙ  ПАРОЛЬ
+password	03690	03680	20	20	10		パスワードを へんこうしてください	СМЕНИТЕ   ПАРОЛЬ
+status	036A5	03695	8	10	10		しょうこひん  	УЛИКИ
+status	036AF	0369F	8	10	10		ききこみ    	ОПРОС
+status	036B9	036A9	9	10	10		とりしらべ   	ДОПРОС
+status	036C3	036B3	9	10	10		じょうほう   	СВЕДЕНИЯ
+status	036CD	036BD	9	10	10		そうさだんかい 	ЭТАП ДЕЛА
+status	036D7	036C7	17	10	10		ただいまの そうさじょうきょう	ХОД ДЕЛА
+names_a	17240	17230	13	10	10	after10_fd_if_room	ビル。ロビンズ   	БИЛЛ РОББ
+names_a	1724E	1723E	10	10	10	after10_fd_if_room	マーサ。キャリントン	МАРТА КЭРР
+names_a	17259	17249	14	10	10	after10_fd_if_room	エドワード。ロビンズ	ЭДВАРД Р
+names_a	17268	17258	13	10	10	after10_fd_if_room	フレッド。ロビンズ 	ФРЕД РОББ
+names_a	17276	17266	12	10	10	after10_fd_if_room	ケイト。ホルデイング	КЕЙТ ХОЛД
+names_a	17283	17273	12	10	10	after10_fd_if_room	トニー ホルデイング	ТОНИ ХОЛД
+names_a	17290	17280	12	10	10	after10_fd_if_room	リサ。ホルデイング 	ЛИЗА ХОЛД
+names_a	1729D	1728D	12	10	10	after10_fd_if_room	マイク。ホルデイング	МАЙК ХОЛД
+names_a	172AA	1729A	11	10	10	after10_fd_if_room	ジョー。キャリントン	ДЖО КЭРР
+names_a	172B6	172A6	13	10	10	after10_fd_if_room	ジャネット。ロビンズ	ДЖАНЕТ Р
+names_a	172C4	172B4	10	10	10	after10_fd_if_room	ラルフ。キャリントン	РАЛЬФ КЭРР
+names_a	172CF	172BF	11	10	10	after10_fd_if_room	サイモン。レンデル 	САЙМОН РЕН
+names_a	172DB	172CB	11	10	10	after10_fd_if_room	スージー。マクナリー	СЬЮЗИ МАК
+names_a	172E7	172D7	11	10	10	after10_fd_if_room	パメラ。スミス   	ПАМЕЛА
+names_a	172F3	172E3	12	10	10	after10_fd_if_room	シエリーマクドナルド	ШЕЛЛИ МАК
+names_a	17300	172F0	13	10	10	after10_fd_if_room	ポール。デービス  	ПОЛ ДЭВИС
+names_a	1730E	172FE	11	10	10	after10_fd_if_room	モラ。シールズ   	САРА ШИЛДС
+names_a	1731A	1730A	11	10	10	after10_fd_if_room	ウイルバー。フオート	УИЛБЕР
+names_a	17326	17316	12	10	10	after10_fd_if_room	ジム。マクベイン  	ДЖИМ МАК
+names_a	17333	17323	12	10	10	after10_fd_if_room	デイジー。ハーネスト	ДЕЙЗИ
+names_a	17340	17330	11	10	10	after10_fd_if_room	スタンリー。ハワード	СТЭН ХОВ
+names_a	1734C	1733C	13	10	10	after10_fd_if_room	グレゴリ。レイモンド	ГРЕГ РЕЙМ
+names_a	1735A	1734A	13	10	10	after10_fd_if_room	ロバート。オズボーン	РОБ ОЗБОРН
+names_a	17368	17358	12	10	10	after10_fd_if_room	ニック。グッドマン 	НИК ГУДМАН
+names_a	17375	17365	11	10	10	after10_fd_if_room	マニエル。バークリー	МАНУЭЛ
+names_a	17381	17371	12	10	10	after10_fd_if_room	モートン。ブラッド 	МОРТОН
+names_a	1738E	1737E	10	10	10	after10_fd_if_room	ハリソン ターナー 	ХАРРИСОН
+names_a	17399	17389	14	10	10	after10_fd_if_room	デビッド。キャンベル	ДЭВИД КЭМП
+names_a	173A8	17398	11	10	10	after10_fd_if_room	マリリン。デニス  	МЭРИЛИН
+names_a	173B4	173A4	11	10	10	after10_fd_if_room	カストニー。ブラウン	КАСТОНИ
+names_a	173C0	173B0	12	10	10	after10_fd_if_room	リンダ。トンプソン 	ЛИНДА
+names_a	173CD	173BD	14	10	10	after10_fd_if_room	ダニー。ビガーズ  	ДЭННИ БИГ
+names_a	173DC	173CC	11	10	10	after10_fd_if_room	ゲイル。リーマン  	ГЕЙЛ ЛАЙМ
+names_a	173E8	173D8	10	10	10	after10_fd_if_room	ヘンリー。クレイン 	Г КЛЕЙН
+names_a	173F3	173E3	11	10	10	after10_fd_if_room	ロバート。マクナリー	РОБ МАКНАЛ
+names_a	173FF	173EF	12	10	10	after10_fd_if_room	マーク。ブレッド  	МАРК БРЭД
+names_a	1740C	173FC	11	10	10	after10_fd_if_room	エド。トレーシー  	ЭД ТРЕЙСИ
+profile_a	17418	17408	10	10	10	after10_fd_if_room	なまえ       	ИМЯ
+profile_a	17423	17413	10	10	10	after10_fd_if_room	ねんれい      	ВОЗРАСТ
+profile_a	1742E	1741E	11	10	10	after10_fd_if_room	じゅうしょ     	АДРЕС
+profile_a	1743A	1742A	11	10	10	after10_fd_if_room	しょくぎょう    	ПРОФЕССИЯ
+profile_a	17446	17436	11	10	10	after10_fd_if_room	けつえきがた    	ГР КРОВИ
+profile_a	17452	17442	11	10	10	after10_fd_if_room	かぞく       	СЕМЬЯ
+profile_a	1745E	1744E	10	10	10	after10_fd_if_room	しゅみ       	ХОББИ
+profile_a	17469	17459	10	10	10	after10_fd_if_room	しかく       	НАВЫКИ
+profile_a	17474	17464	10	10	10	after10_fd_if_room	しゅっしんち    	РОДОМ
+profile_a	1747F	1746F	12	10	10	after10_fd_if_room	しょぞくだんたい  	ЧЛЕНСТВО
+profile_a	1748C	1747C	11	10	10	after10_fd_if_room	ありばい      	АЛИБИ
+profile_a	17498	17488	12	10	10	after10_fd_if_room	レッドタイクラブ  	РЕД ТАЙ
+profile_a	174A5	17495	11	10	10	after10_fd_if_room	ホワイトホーククラブ	УАЙТ ХОК
+profile_a	174B1	174A1	11	10	10	after10_fd_if_room	アネモネクラブ   	АНЕМОНА
+profile_a	174BD	174AD	13	10	10	after10_fd_if_room	リバテイバンクじけん	ЛИБЕРТИ
+profile_a	174CB	174BB	12	10	10	after10_fd_if_room	サラぼうこうじけん 	ДЕЛО САРЫ
+profile_a	174D8	174C8	11	10	10	after10_fd_if_room	クレインていじけん 	ДОМ КЛЕЙНА
+profile_a	174E4	174D4	11	10	10	after10_fd_if_room	イヤリング     	СЕРЬГА
+profile_a	174F0	174E0	10	10	10	after10_fd_if_room	せいめいほけん   	СТРАХОВКА
+profile_a	174FB	174EB	11	10	10	after10_fd_if_room	ヘアピース     	ПАРИК
+profile_a	17507	174F7	11	10	10	after10_fd_if_room	てがみ       	ПИСЬМО
+profile_a	17513	17503	11	10	10	after10_fd_if_room	ピストル      	ПИСТОЛЕТ
+profile_a	1751F	1750F	10	10	10	after10_fd_if_room	スカーフ      	ШАРФ
+profile_a	1752A	1751A	11	10	10	after10_fd_if_room	ビルのしゅっせい  	РОЖД БИЛЛА
+profile_a	17536	17526	10	10	10	after10_fd_if_room	ちちおや      	ОТЕЦ
+profile_a	17541	17531	10	10	10	after10_fd_if_room	けっこん      	БРАК
+profile_a	1754C	1753C	12	10	10	after10_fd_if_room	じどうしゃ     	МАШИНА
+profile_a	17559	17549	10	10	10	after10_fd_if_room	きょうかいのいぬ  	ПЁС ЦЕРКВИ
+profile_a	17564	17554	10	10	10	after10_fd_if_room	ナイフ       	НОЖ
+profile_a	1756F	1755F	10	10	10	after10_fd_if_room	とけい       	ЧАСЫ
+profile_a	1757A	1756A	10	10	10	after10_fd_if_room	しゃしん      	ФОТО
+profile_a	17585	17575	10	10	10	after10_fd_if_room	はか        	МОГИЛА
+profile_a	17590	17580	10	10	10	after10_fd_if_room	ほね        	КОСТЬ
+profile_a	1759B	1758B	12	10	10	after10_fd_if_room	しんぶんきじ    	ГАЗЕТА
+profile_a	175A8	17598	11	10	10	after10_fd_if_room	コンタクトレンズ  	ЛИНЗЫ
+profile_a	175B4	175A4	10	10	10	after10_fd_if_room	つうちょう     	СЧЁТ
+profile_a	175BF	175AF	10	10	10	after10_fd_if_room	メス        	СКАЛЬПЕЛЬ
+profile_a	175CA	175BA	11	10	10	after10_fd_if_room	かいしゃのぎょうせき	ДЕЛА ФИРМЫ
+profile_a	175D6	175C6	11	10	10	after10_fd_if_room	ほかにきづいたこと 	НАБЛЮДЕНИЯ
+profile_a	175E2	175D2	10	10	10	after10_fd_if_room	しんはんにんは   	УБИЙЦА
+profile_a	175ED	175DD	11	10	10	after10_fd_if_room	どうきは      	МОТИВ
+profile_a	175F9	175E9	10	10	10	after10_fd_if_room	きょうきは     	ОРУЖИЕ
+profile_a	17604	175F4	10	10	10	after10_fd_if_room	ほうほうは     	СПОСОБ
+profile_a	1760F	175FF	10	10	10	after10_fd_if_room	めいきゅういり   	ТУПИК
+profile_a	17635	17625	11	10	10	after10_fd_if_room	クレインていじけん 	ДОМ КЛЕЙНА
+profile_a	17641	17631	11	10	10	after10_fd_if_room	とうなんひんとどけ 	КРАЖИ
+profile_a	1764D	1763D	12	10	10	after10_fd_if_room	じどうしゃ     	МАШИНА
+profile_a	1765A	1764A	10	10	10	after10_fd_if_room	とけい       	ЧАСЫ
+profile_a	17665	17655	10	10	10	after10_fd_if_room	ナイフ       	НОЖ
+profile_a	17670	17660	10	10	10	after10_fd_if_room	みもとふめいしたい 	НЕИЗВ ТРУП
+places	1D330	1D320	12	10	10	after10_fd_if_room	ロビンズしょうかい 	РОББИНС КО
+places	1D33D	1D32D	11	10	10	after10_fd_if_room	HHカンパニー   	КОМП НН
+places	1D349	1D339	10	10	10	after10_fd_if_room	ホームエステイト  	ХОУМ ЭСТ
+places	1D354	1D344	11	10	10	after10_fd_if_room	ガスライトシアター 	ГАСЛАЙТ
+places	1D360	1D350	14	10	10	after10_fd_if_room	パブ。リバーサイド 	РИВЕРСАЙД
+places	1D36F	1D35F	12	10	10	after10_fd_if_room	リバテイバンク   	ЛИБЕРТИ Б
+places	1D37C	1D36C	14	10	10	after10_fd_if_room	ビッグバーガー   	БИГ БУРГЕР
+places	1D38B	1D37B	10	10	10	after10_fd_if_room	ハートセイフ    	ХАРТ СЕЙФ
+places	1D396	1D386	12	10	10	after10_fd_if_room	ホテルグランド   	ГРАНД
+places	1D3A3	1D393	13	10	10	after10_fd_if_room	ビルロビンズのいえ 	ДОМ БИЛЛА
+places	1D3B1	1D3A1	12	10	10	after10_fd_if_room	エドワードのいえ  	ДОМ ЭДВАРД
+places	1D3BE	1D3AE	12	10	10	after10_fd_if_room	ホルデイングのいえ 	ДОМ ХОЛД
+places	1D3CB	1D3BB	11	10	10	after10_fd_if_room	レンデルいいん   	КЛ РЕНДЕЛЛ
+places	1D3D7	1D3C7	11	10	10	after10_fd_if_room	レンデルのいえ   	ДОМ РЕНДЕЛ
+places	1D3E3	1D3D3	12	10	10	after10_fd_if_room	ハワードのアパート 	КВ ХОВАРДА
+places	1D3F0	1D3E0	12	10	10	after10_fd_if_room	ドラッグストア   	АПТЕКА
+places	1D3FD	1D3ED	10	10	10	after10_fd_if_room	キャリントンのいえ 	КЭРРИНГТОН
+places	1D408	1D3F8	11	10	10	after10_fd_if_room	マクベインのいえ  	МАКБЕЙН
+places	1D414	1D404	11	10	10	after10_fd_if_room	シエリーのアパート 	КВ ШЕЛЛИ
+places	1D420	1D410	10	10	10	after10_fd_if_room	せいノースきょうかい	СЕНТ НОРТ
+places	1D42B	1D41B	14	10	10	after10_fd_if_room	ダウンズヒルズぼち 	КЛАДБИЩЕ
+places	1D43A	1D42A	11	10	10	after10_fd_if_room	ハウリントンカレッジ	ХАУЛИНГТОН
+places	1D446	1D436	11	10	10	after10_fd_if_room	ちゅうしゃじょう  	ПАРКОВКА
+rooms	1D452	1D442	10	10	10	after10_fd_if_room	いま        	ГОСТИНАЯ
+rooms	1D45D	1D44D	10	10	10	after10_fd_if_room	しんしつ      	СПАЛЬНЯ
+rooms	1D468	1D458	10	10	10	after10_fd_if_room	しょさい      	КАБИНЕТ
+rooms	1D473	1D463	10	10	10	after10_fd_if_room	キッチン      	КУХНЯ
+rooms	1D47E	1D46E	10	10	10	after10_fd_if_room	いま        	ГОСТИНАЯ
+rooms	1D489	1D479	12	10	10	after10_fd_if_room	エドワードのへや  	ЭДВАРД
+rooms	1D496	1D486	11	10	10	after10_fd_if_room	フレッドのへや   	ФРЕД
+rooms	1D4A2	1D492	11	10	10	after10_fd_if_room	パメラのへや    	ПАМЕЛА
+rooms	1D4AE	1D49E	10	10	10	after10_fd_if_room	きゃくま      	ГОСТЕВАЯ
+rooms	1D4B9	1D4A9	10	10	10	after10_fd_if_room	キッチン      	КУХНЯ
+rooms	1D4C4	1D4B4	10	10	10	after10_fd_if_room	いま        	ГОСТИНАЯ
+rooms	1D4CF	1D4BF	10	10	10	after10_fd_if_room	トニーふうふのへや 	ТОНИ СЕМ
+rooms	1D4DA	1D4CA	10	10	10	after10_fd_if_room	マイクふうふのへや 	МАЙК СЕМ
+rooms	1D4E5	1D4D5	10	10	10	after10_fd_if_room	きゃくま      	ГОСТЕВАЯ
+rooms	1D4F0	1D4E0	10	10	10	after10_fd_if_room	キッチン      	КУХНЯ
+rooms	1D4FB	1D4EB	10	10	10	after10_fd_if_room	うけつけ      	ПРИЁМНАЯ
+rooms	1D506	1D4F6	10	10	10	after10_fd_if_room	しんさつしつ    	КАБИНЕТ
+rooms	1D511	1D501	11	10	10	after10_fd_if_room	びょうしつ     	ПАЛАТА
+rooms	1D51D	1D50D	10	10	10	after10_fd_if_room	いま        	ГОСТИНАЯ
+rooms	1D528	1D518	10	10	10	after10_fd_if_room	サイモンのへや   	САЙМОН
+rooms	1D533	1D523	11	10	10	after10_fd_if_room	スージーのへや   	СЬЮЗИ
+rooms	1D53F	1D52F	10	10	10	after10_fd_if_room	いま        	ГОСТИНАЯ
+rooms	1D54A	1D53A	10	10	10	after10_fd_if_room	しょさい      	КАБИНЕТ
+rooms	1D555	1D545	10	10	10	after10_fd_if_room	いま        	ГОСТИНАЯ
+rooms	1D560	1D550	11	10	10	after10_fd_if_room	ジョーふうふのへや 	ДЖО СЕМ
+rooms	1D56C	1D55C	10	10	10	after10_fd_if_room	ラルフのへや    	РАЛЬФ
+rooms	1D577	1D567	11	10	10	after10_fd_if_room	ジャネットのへや  	ДЖАНЕТ
+rooms	1D583	1D573	10	10	10	after10_fd_if_room	きゃくま      	ГОСТЕВАЯ
+rooms	1D58E	1D57E	10	10	10	after10_fd_if_room	キッチン      	КУХНЯ
+rooms	1D599	1D589	10	10	10	after10_fd_if_room	いま        	ГОСТИНАЯ
+rooms	1D5A4	1D594	11	10	10	after10_fd_if_room	ジムのへや     	ДЖИМ
+rooms	1D5B0	1D5A0	10	10	10	after10_fd_if_room	いま        	ГОСТИНАЯ
+rooms	1D5BB	1D5AB	10	10	10	after10_fd_if_room	しんしつ      	СПАЛЬНЯ
+names	1D5C6	1D5B6	13	10	10	after10_fd_if_room	ビル。ロビンズ   	БИЛЛ РОББ
+names	1D5D4	1D5C4	10	10	10	after10_fd_if_room	マーサ。キャリントン	МАРТА КЭРР
+names	1D5DF	1D5CF	14	10	10	after10_fd_if_room	エドワード。ロビンズ	ЭДВАРД Р
+names	1D5EE	1D5DE	13	10	10	after10_fd_if_room	フレッド。ロビンズ 	ФРЕД РОББ
+names	1D5FC	1D5EC	12	10	10	after10_fd_if_room	ケイト。ホルデイング	КЕЙТ ХОЛД
+names	1D609	1D5F9	12	10	10	after10_fd_if_room	トニー。ホルデイング	ТОНИ ХОЛД
+names	1D616	1D606	12	10	10	after10_fd_if_room	リサ。ホルデイング 	ЛИЗА ХОЛД
+names	1D623	1D613	12	10	10	after10_fd_if_room	マイク。ホルデイング	МАЙК ХОЛД
+names	1D630	1D620	11	10	10	after10_fd_if_room	ジョー。キャリントン	ДЖО КЭРР
+names	1D63C	1D62C	13	10	10	after10_fd_if_room	ジャネット。ロビンズ	ДЖАНЕТ Р
+names	1D64A	1D63A	10	10	10	after10_fd_if_room	ラルフ。キャリントン	РАЛЬФ КЭРР
+names	1D655	1D645	11	10	10	after10_fd_if_room	サイモン。レンデル 	САЙМОН РЕН
+names	1D661	1D651	11	10	10	after10_fd_if_room	スージー。マクナリー	СЬЮЗИ МАК
+names	1D66D	1D65D	11	10	10	after10_fd_if_room	パメラ。スミス   	ПАМЕЛА
+names	1D679	1D669	12	10	10	after10_fd_if_room	シエリーマクドナルド	ШЕЛЛИ МАК
+names	1D686	1D676	13	10	10	after10_fd_if_room	ポール。デービス  	ПОЛ ДЭВИС
+names	1D694	1D684	11	10	10	after10_fd_if_room	サラ。シールズ   	САРА ШИЛДС
+names	1D6A0	1D690	11	10	10	after10_fd_if_room	ウイルバー。フオート	УИЛБЕР
+names	1D6AC	1D69C	12	10	10	after10_fd_if_room	ジム。マクベイン  	ДЖИМ МАК
+names	1D6B9	1D6A9	12	10	10	after10_fd_if_room	デイジー。ハーネスト	ДЕЙЗИ
+names	1D6C6	1D6B6	11	10	10	after10_fd_if_room	スタンリー。ハワード	СТЭН ХОВ
+names	1D6D2	1D6C2	13	10	10	after10_fd_if_room	グレゴリ。レイモンド	ГРЕГ РЕЙМ
+names	1D6E0	1D6D0	13	10	10	after10_fd_if_room	ロバート。オズボーン	РОБ ОЗБОРН
+names	1D6EE	1D6DE	12	10	10	after10_fd_if_room	ニック。グッドマン 	НИК ГУДМАН
+names	1D6FB	1D6EB	11	10	10	after10_fd_if_room	マニエル。バークリー	МАНУЭЛ
+names	1D707	1D6F7	12	10	10	after10_fd_if_room	モートン。ブラッド 	МОРТОН
+names	1D714	1D704	10	10	10	after10_fd_if_room	ハリソン。ターナー 	ХАРРИСОН
+names	1D71F	1D70F	14	10	10	after10_fd_if_room	デビッド。キャンベル	ДЭВИД КЭМП
+names	1D72E	1D71E	11	10	10	after10_fd_if_room	マリリン。デニス  	МЭРИЛИН
+names	1D73A	1D72A	11	10	10	after10_fd_if_room	カストニー。ブラウン	КАСТОНИ
+names	1D746	1D736	12	10	10	after10_fd_if_room	リンダ。トンプソン 	ЛИНДА
+names	1D753	1D743	14	10	10	after10_fd_if_room	ダニー。ビガーズ  	ДЭННИ БИГ
+names	1D762	1D752	11	10	10	after10_fd_if_room	ゲイル。リーマン  	ГЕЙЛ ЛАЙМ
+names	1D76E	1D75E	10	10	10	after10_fd_if_room	ヘンリー。クレイン 	Г КЛЕЙН
+names	1D779	1D769	11	10	10	after10_fd_if_room	ロバート。マクナリー	РОБ МАКНАЛ
+names	1D785	1D775	12	10	10	after10_fd_if_room	マーク。ブレッド  	МАРК БРЭД
+names	1D792	1D782	11	10	10	after10_fd_if_room	エド。トレーシー  	ЭД ТРЕЙСИ
+profile_b	1D79E	1D78E	10	10	10	after10_fd_if_room	なまえ       	ИМЯ
+profile_b	1D7A9	1D799	10	10	10	after10_fd_if_room	ねんれい      	ВОЗРАСТ
+profile_b	1D7B4	1D7A4	11	10	10	after10_fd_if_room	じゅうしょ     	АДРЕС
+profile_b	1D7C0	1D7B0	11	10	10	after10_fd_if_room	しょくぎょう    	ПРОФЕССИЯ
+profile_b	1D7CC	1D7BC	11	10	10	after10_fd_if_room	けつえきがた    	ГР КРОВИ
+profile_b	1D7D8	1D7C8	11	10	10	after10_fd_if_room	かぞく       	СЕМЬЯ
+profile_b	1D7E4	1D7D4	10	10	10	after10_fd_if_room	しゅみ       	ХОББИ
+profile_b	1D7EF	1D7DF	10	10	10	after10_fd_if_room	しかく       	НАВЫКИ
+profile_b	1D7FA	1D7EA	10	10	10	after10_fd_if_room	しゅっしんち    	РОДОМ
+profile_b	1D805	1D7F5	12	10	10	after10_fd_if_room	しょぞくだんたい  	ЧЛЕНСТВО
+profile_b	1D812	1D802	11	10	10	after10_fd_if_room	ありばい      	АЛИБИ
+profile_b	1D81E	1D80E	12	10	10	after10_fd_if_room	レッドタイクラブ  	РЕД ТАЙ
+profile_b	1D82B	1D81B	11	10	10	after10_fd_if_room	ホワイトホーククラブ	УАЙТ ХОК
+profile_b	1D837	1D827	11	10	10	after10_fd_if_room	あねもねクラブ   	АНЕМОНА
+profile_b	1D843	1D833	13	10	10	after10_fd_if_room	リバテイバンクじけん	ЛИБЕРТИ
+profile_b	1D851	1D841	12	10	10	after10_fd_if_room	サラぼうこうじけん 	ДЕЛО САРЫ
+profile_b	1D85E	1D84E	11	10	10	after10_fd_if_room	クレインていじけん 	ДОМ КЛЕЙНА
+profile_b	1D86A	1D85A	11	10	10	after10_fd_if_room	イヤリング     	СЕРЬГА
+profile_b	1D876	1D866	10	10	10	after10_fd_if_room	せいめいほけん   	СТРАХОВКА
+profile_b	1D881	1D871	11	10	10	after10_fd_if_room	ヘアピース     	ПАРИК
+profile_b	1D88D	1D87D	11	10	10	after10_fd_if_room	てがみ       	ПИСЬМО
+profile_b	1D899	1D889	11	10	10	after10_fd_if_room	ピストル      	ПИСТОЛЕТ
+profile_b	1D8A5	1D895	10	10	10	after10_fd_if_room	スカーフ      	ШАРФ
+profile_b	1D8B0	1D8A0	11	10	10	after10_fd_if_room	ビルのしゅっせい  	РОЖД БИЛЛА
+profile_b	1D8BC	1D8AC	10	10	10	after10_fd_if_room	ちちおや      	ОТЕЦ
+profile_b	1D8C7	1D8B7	10	10	10	after10_fd_if_room	けっこん      	БРАК
+profile_b	1D8D2	1D8C2	12	10	10	after10_fd_if_room	じどうしゃ     	МАШИНА
+profile_b	1D8DF	1D8CF	10	10	10	after10_fd_if_room	きょうかいのいぬ  	ПЁС ЦЕРКВИ
+profile_b	1D8EA	1D8DA	10	10	10	after10_fd_if_room	ナイフ       	НОЖ
+profile_b	1D8F5	1D8E5	10	10	10	after10_fd_if_room	とけい       	ЧАСЫ
+profile_b	1D900	1D8F0	10	10	10	after10_fd_if_room	しゃしん      	ФОТО
+profile_b	1D90B	1D8FB	10	10	10	after10_fd_if_room	はか        	МОГИЛА
+profile_b	1D916	1D906	10	10	10	after10_fd_if_room	ほね        	КОСТЬ
+profile_b	1D921	1D911	12	10	10	after10_fd_if_room	しんぶんきじ    	ГАЗЕТА
+profile_b	1D92E	1D91E	11	10	10	after10_fd_if_room	コンタクトレンズ  	ЛИНЗЫ
+profile_b	1D93A	1D92A	10	10	10	after10_fd_if_room	つうちょう     	СЧЁТ
+profile_b	1D945	1D935	10	10	10	after10_fd_if_room	メス        	СКАЛЬПЕЛЬ
+profile_b	1D950	1D940	11	10	10	after10_fd_if_room	かいしゃのぎょうせき	ДЕЛА ФИРМЫ
+profile_b	1D95C	1D94C	11	10	10	after10_fd_if_room	ほかにきづいたこと 	НАБЛЮДЕНИЯ
+profile_b	1D968	1D958	10	10	10	after10_fd_if_room	しんはんにんは   	УБИЙЦА
+profile_b	1D973	1D963	11	10	10	after10_fd_if_room	どうきは      	МОТИВ
+profile_b	1D97F	1D96F	10	10	10	after10_fd_if_room	きょうきは     	ОРУЖИЕ
+profile_b	1D98A	1D97A	10	10	10	after10_fd_if_room	ほうほうは     	СПОСОБ
+profile_b	1D995	1D985	10	10	10	after10_fd_if_room	めいきゅういり   	ТУПИК
+profile_b	1D9A0	1D990	13	10	10	after10_fd_if_room	リバテイバンクじけん	ЛИБЕРТИ
+profile_b	1D9AE	1D99E	12	10	10	after10_fd_if_room	サラぼうこうじけん 	ДЕЛО САРЫ
+profile_b	1D9BB	1D9AB	11	10	10	after10_fd_if_room	クレインていじけん 	ДОМ КЛЕЙНА
+profile_b	1D9C7	1D9B7	11	10	10	after10_fd_if_room	とうなんひんとどけ 	КРАЖИ
+profile_b	1D9D3	1D9C3	12	10	10	after10_fd_if_room	じどうしゃ     	МАШИНА
+profile_b	1D9E0	1D9D0	10	10	10	after10_fd_if_room	とけい       	ЧАСЫ
+profile_b	1D9EB	1D9DB	10	10	10	after10_fd_if_room	ナイフ       	НОЖ
+profile_b	1D9F6	1D9E6	10	10	10	after10_fd_if_room	みもとふめいしたい 	НЕИЗВ ТРУП
+profile_b	1DA01	1D9F1	11	10	10	after10_fd_if_room	だんせいA     	МУЖЧИНА А
+profile_b	1DA0D	1D9FD	11	10	10	after10_fd_if_room	だんせいB     	МУЖЧИНА Б
+profile_b	1DA19	1DA09	14	10	10	after10_fd_if_room	いえでにんそうさくねがい	РОЗЫСК
+profile_b	1DA28	1DA18	11	10	10	after10_fd_if_room	エドトレーシー   	ЭД ТРЕЙСИ
+profile_b	1DA34	1DA24	11	10	10	after10_fd_if_room	イヤリング     	СЕРЬГА
+profile_b	1DA40	1DA30	10	10	10	after10_fd_if_room	けいやくしょ    	ДОГОВОР
+profile_b	1DA4B	1DA3B	11	10	10	after10_fd_if_room	ヘアピース     	ПАРИК
+profile_b	1DA57	1DA47	11	10	10	after10_fd_if_room	てがみ       	ПИСЬМО
+profile_b	1DA63	1DA53	11	10	10	after10_fd_if_room	ピストル      	ПИСТОЛЕТ
+profile_b	1DA6F	1DA5F	10	10	10	after10_fd_if_room	スカーフ      	ШАРФ
+profile_b	1DA7A	1DA6A	10	10	10	after10_fd_if_room	ナイフ       	НОЖ
+profile_b	1DA85	1DA75	10	10	10	after10_fd_if_room	とけい       	ЧАСЫ
+profile_b	1DA90	1DA80	10	10	10	after10_fd_if_room	しゃしん      	ФОТО
+profile_b	1DA9B	1DA8B	10	10	10	after10_fd_if_room	ほね        	КОСТЬ
+profile_b	1DAA6	1DA96	11	10	10	after10_fd_if_room	しんぶんのきりぬき 	ГАЗЕТА
+profile_b	1DAB2	1DAA2	11	10	10	after10_fd_if_room	コンタクトレンズ  	ЛИНЗЫ
+profile_b	1DABE	1DAAE	12	10	10	after10_fd_if_room	パスポート     	ПАСПОРТ
+profile_b	1DACB	1DABB	10	10	10	after10_fd_if_room	メス        	СКАЛЬПЕЛЬ
+profile_b	1DAD6	1DAC6	11	10	10	after10_fd_if_room	ちょうぼ      	БУХКНИГА
+profile_b	1DAE2	1DAD2	10	10	10	after10_fd_if_room	つうちょう     	СЧЁТ
+profile_b	1DAED	1DADD	10	10	10	after10_fd_if_room	しゃくようしょ   	РАСПИСКА
+profile_b	1DAF8	1DAE8	11	10	10	after10_fd_if_room	かいいんめいぼ   	СПИСОК
+profile_b	1DB04	1DAF4	10	10	10	after10_fd_if_room	しゃくようしょ   	РАСПИСКА
+profile_b	1DB0F	1DAFF	11	10	10	after10_fd_if_room	ちょうぼ      	БУХКНИГА
+profile_b	1DB1B	1DB0B	11	10	10	after10_fd_if_room	かいいんめいぼ   	СПИСОК
+profile_b	1DB27	1DB17	10	10	10	after10_fd_if_room	はっけんのようす  	НАХОДКА
+profile_b	1DB32	1DB22	11	10	10	after10_fd_if_room	はかば       	КЛАДБИЩЕ
+profile_b	1DB3E	1DB2E	10	10	10	after10_fd_if_room	こうない      	КАМПУС
+profile_b	1DB49	1DB39	11	10	10	after10_fd_if_room	いりぐち      	ВХОД
+profile_b	1DB55	1DB45	10	10	10	after10_fd_if_room	ホテルのフロント  	РЕЦЕПЦИЯ
+profile_b	1DB60	1DB50	10	10	10	after10_fd_if_room	きゃくしつ     	НОМЕР
+profile_b	1DB6B	1DB5B	12	10	10	after10_fd_if_room	げんば       	МЕСТО
+profile_b	1DB78	1DB68	10	10	10	after10_fd_if_room	はか        	МОГИЛА
+profile_b	1DB83	1DB73	10	10	10	after10_fd_if_room	はい        	ДА
+profile_b	1DB8E	1DB7E	10	10	10	after10_fd_if_room	いいえ       	НЕТ

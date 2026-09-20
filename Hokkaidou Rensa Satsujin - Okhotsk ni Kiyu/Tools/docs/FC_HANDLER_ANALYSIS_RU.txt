@@ -1,0 +1,118 @@
+FC HANDLER $C9E1 — РАЗБОР И ОШИБКА v0.8.1
+==========================================
+
+Назначение
+----------
+FC xx — условная вставка одного из коротких FF-delimited текстов (в этой ROM это
+в основном имя/префикс говорящего). Аргумент xx одновременно задаёт:
+- какой бит state byte $37 проверить;
+- какой entry выбрать при flag=0;
+- какой entry выбрать при flag=1.
+
+Ключевой фрагмент 6502
+----------------------
+CPU $C9E1:
+  JSR $C69A
+  JSR $C660       ; прочитать аргумент FC
+  PHA
+  AND #$07
+  TAX             ; bit = arg & 7
+  LDA $37
+  INX
+loop:
+  ROR A
+  DEX
+  BNE loop        ; carry = выбранный бит state $37
+  PHP
+  LDA #$00
+  ROL A
+  ROL A
+  TAX             ; X=0 если flag=0, X=2 если flag=1
+  PLP
+  PLA
+  BCS flag1
+  LSR A
+  LSR A
+  LSR A
+flag1:
+  LSR A
+  LSR A
+  LSR A
+  AND #$07        ; flag0: (arg>>6)&7, flag1: (arg>>3)&7
+  PHA
+
+CPU $CA05:
+  LDA #$0A
+  JSR $FEF4       ; КРИТИЧЕСКИ: принудительно включить PRG bank A
+  LDA $801E,X     ; X=0 -> pointer ID15, X=2 -> pointer ID16
+  STA $14
+  LDA $801F,X
+  ORA #$80
+  STA $15
+
+Далее сохранённый index используется для пропуска нужного количества потоков:
+каждый поток ищется простым сканированием до byte $FF.
+
+Формулы
+-------
+bit = arg & 7
+flag = ($37 >> bit) & 1
+
+flag=0:
+  base = pointer ID15
+  index = (arg >> 6) & 7
+
+flag=1:
+  base = pointer ID16
+  index = (arg >> 3) & 7
+
+Почему v0.8.1 давала полный мусор
+--------------------------------
+Обычный text repacker рассматривает A-D как единый region $0000-$FFFF и может
+переместить stream, например, в global offset $8859 (это bank C).
+
+v0.8.1 поместила FC slab именно по $8859 и записала ID15=$8859.
+Но $C9E1 сначала жёстко включает bank A и только потом интерпретирует pointer как
+CPU $8000-$BFFF. Поэтому $8859 для него означает НЕ global offset $8859, а:
+
+  PRG bank A, CPU $8859 -> bank-A local offset $0859.
+
+По $0859 лежат байты pointer table, не FC-текст. Отсюда и бессмысленная каша.
+
+Правильное решение v0.8.2
+-------------------------
+FC slab фиксирован на исходном bank-A месте:
+
+  ID15 = $140E
+  ID16 = $1414
+
+Семь consecutive entries:
+  0  generic *:
+  1  generic *:
+  2  Такано:
+  3  Таэ:
+  4  Сакагути:
+  5  Макико:
+  6  Мэгуми:
+
+Итоговый диапазон после русского BPE: $140E-$1432.
+
+Встречающиеся FC args и выбор entries
+-------------------------------------
+        flag=0      flag=1
+FC 07   entry 0     entry 2 = Такано
+FC 15   entry 0     entry 4 = Сакагути
+FC 4E   entry 1     entry 3 = Таэ
+FC 5C   entry 1     entry 5 = Макико
+FC 63   entry 1     entry 6 = Мэгуми
+
+Следовательно entries 7+ для изученной ROM не нужны. ID237-239 физически шли
+сразу после японской таблицы, но ни один реально встречающийся FC arg их не выбирает.
+В v0.8.2 они снова обычные relocatable root streams.
+
+Защита от повторения
+--------------------
+- repack_pool.py фиксирует slab по $140E и запрещает выход за bank A.
+- tests/selftest.py проверяет машинный код $C9E1/$CA05 и формулы FC index.
+- tests/verify_full_rom.py требует ID15=$140E, ID16=$1414 и < $4000.
+- verify_full_rom эмулирует FF-scan для всех найденных FC args при flag=0/1.

@@ -1,0 +1,20 @@
+FINAL DELTA / ПОСЛЕДНИЕ ИСПРАВЛЕНИЯ
+====================================
+
+База перед финальными QA-фиксами: v0.23.
+
+1) v0.24 — ALL 27 ENEMY NAMES
+Battle $5B использует индекс RAM $00E5 и 27-entry pointer table CPU $A779.
+v0.22/v0.23 переписали только первые 16 pointer entries. FINAL переписывает
+все 27 и использует pool CPU $A7AF-$A880 (202/210 байт).
+
+2) v0.25 — ORIGINAL ENDING LOOP
+В expanded ROM CPU $FF79 занят far-text runtime и конфликтует с high byte
+оригинального JMP $FF6C по $FF77-$FF79. FINAL использует:
+  JSR $F4BE
+  BEQ $FF6C
+потому что $F4BE детерминированно возвращает Z=1.
+
+Это возвращает повтор титров и музыки без повреждения runtime $FF79.
+
+FINAL v1.0 не меняет байты после подтверждённой v0.25.

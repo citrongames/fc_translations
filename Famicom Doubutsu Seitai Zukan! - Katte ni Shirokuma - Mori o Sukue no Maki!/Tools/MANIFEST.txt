@@ -1,0 +1,37 @@
+KATTE NI SHIROKUMA RU FINAL v1.0 — MANIFEST
+===========================================
+
+CHANGELOG.txt	2945 bytes
+FINAL_TEST_STATUS.txt	1859 bytes
+Katte_Shirokuma_RU_FINAL_v1.0.nes	393232 bytes
+README_RU.txt	9540 bytes
+SELFTEST_LOG.txt	1124 bytes
+VERSION.txt	161 bytes
+WALKTHROUGH_RU.txt	45399 bytes
+assets/chr_bank_02_final.png	3369 bytes
+assets/user_font_sheet_latest.png	5658 bytes
+docs/CHR_LAYOUT.txt	1813 bytes
+docs/RUSSIAN_FONT_MAP.txt	1219 bytes
+docs/TECHNICAL_NOTES.txt	3165 bytes
+docs/TEXT_FORMAT.txt	1547 bytes
+docs/TOOLS_RU.txt	2042 bytes
+script/credits_final.txt	317 bytes
+script/enemy_names_final.tsv	440 bytes
+script/glossary_ru.md	4434 bytes
+script/script_jp_reference.txt	194580 bytes
+script/script_ru_final.txt	145606 bytes
+source/FINAL_DELTA_NOTES.txt	995 bytes
+source/final_delta_from_v023.py	2252 bytes
+tools/credits_tool.py	2392 bytes
+tools/enemy_names.py	2414 bytes
+tools/extract_chr.py	1676 bytes
+tools/extract_text.py	5151 bytes
+tools/insert_chr.py	1669 bytes
+tools/insert_text.py	6578 bytes
+tools/katte_codec.py	7225 bytes
+tools/layout_check.py	3549 bytes
+tools/repack_original.py	7910 bytes
+tools/requirements.txt	13 bytes
+tools/roundtrip_original.py	921 bytes
+tools/selftest_final.py	1649 bytes
+tools/validate_final.py	3846 bytes

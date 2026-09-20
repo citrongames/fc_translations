@@ -1,0 +1,19 @@
+MURDER CLUB RU — FINAL CHECKSUMS
+================================
+
+ORIGINAL ROM (not included as original Japanese ROM):
+SHA1    bb1fb4700ad1cf83bd32acb640747f2a9d337238  Murder Club - Honkaku Mystery Adventure (Japan).nes
+
+FINAL BUILT ROM:
+SHA1    fb47326f07ef46194a9ffca6a34ca8db4989954f  Murder_Club_RU_FINAL.nes
+SHA256  3f38d815da5da91171bec01d7ad1cc8c72b302a6a13e3422920cf797e89698ea  Murder_Club_RU_FINAL.nes
+
+IMPORTANT SOURCE FILES:
+SHA1    2082930cc85575e51ca833722b592470a848993b  build_russian_rom.py
+SHA1    ffcad93039821f5587fc3780d60c438aecd9c0f6  translation_ru.tsv
+SHA1    920fafddf3c185057278f037a83f3aefc2addc0c  supplemental_text_ru.tsv
+SHA1    e0337dac4a736a2a1f64dc82e3f2d3314500e488  static_ui_ru.tsv
+SHA1    79c095e112c4c4d37a3864c95e6837d3f245b3bd  direct_ending_ru.tsv
+SHA1    0923c3d869a5ff15c18758710263733ce454daf1  inline_ending_ru.tsv
+SHA1    3f48641aad1f5e726bf050b0a71e87ea2041614e  murder_club_ru.tbl
+SHA1    ba72bb3b45a59db3c0ab1fb38890625fe9bdecd1  font_direct_80_FF_RU.png

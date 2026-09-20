@@ -1,0 +1,6 @@
+﻿# Russian dictionary for Okhotsk FC. 60 and 62 remain original control macros.
+# Unlisted safe tokens are emptied by patch_ru_dictionary.py.
+TOKEN	TEXT	COUNT	RAW_BYTES	EST_NET_SAVING
+61	у Харуми	2	10	8
+63	Куроки	2	7	5
+64	Харуми	2	7	5

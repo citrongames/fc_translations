@@ -1,0 +1,107 @@
+OKHOTSK TEXT BYTECODE — CONTROL / DISPATCH NOTES v0.8.3
+====================================================
+
+ОРИГИНАЛЬНЫЙ high-nibble dispatcher (fixed bank F, table CPU $C640):
+  0-3 -> direct glyph handler $C736
+  4-5 -> voiced/semi-voiced kana composition $C743
+  6-C -> dictionary $C758
+  D   -> extra direct glyph handler $C79C
+  E   -> +$40 glyph-run handler $C7AF
+  F   -> control dispatcher $C7B8
+
+PATCHED v0.8 dispatcher:
+  0-3 -> direct RU glyphs
+  4-5 -> direct lowercase RU glyphs (patched $C743)
+  6-C -> main dictionary $C758
+  D   -> secondary dictionary $C79C
+  E   -> secondary dictionary $C79C
+  F   -> control dispatcher unchanged
+
+В русском v0.8.3:
+  01-21 = А-Я
+  22-2B = 0-9
+  2C = ю
+  2D = я
+  3B = оригинальная стрелка вниз (UI, сохранена)
+  40 = оригинальная стрелка вправо (UI, сохранена)
+  41-5F = а-э
+  60-CF = main dictionary tokens
+  D0-EF = secondary dictionary tokens
+
+Оригинальные D/E semantics больше не используются русским text bytecode. Экраны ввода
+имени/пароля используют отдельный picker compositor CPU $CB0A. В v0.8.11 его японская
+композиция dakuten/handakuten отключена: $41-$5F идут как прямые RU glyph codes.
+
+F-dispatch table CPU $C7C6:
+  F0 -> $C7E6
+  F1 -> $C7FE
+  F2 -> $C80D
+  F3 -> $C82B
+  F4 -> $C83F
+  F5 -> $C86A
+  F6 -> $C87E
+  F7 -> $C88A
+  F8 -> $C892
+  F9 -> $C89A
+  FA -> $C8F5
+  FB -> $C9CE
+  FC -> $C9E1
+  FD -> $CA42
+  FE -> $CA6C
+  FF -> $CA8C
+
+Inline argument lengths:
+  F0 = variable, bytes until first arg with bit7=1 inclusive
+  F1 = 1 byte
+  F2 = 2 bytes little-endian text-region address
+  F3 = 0
+  F4 = 0
+  F5 = 2
+  F6 = 1
+  F7 = 0
+  F8 = 0 (newline)
+  F9 = 0
+  FA = 0
+  FB = 1 (literal glyph path confirmed statically)
+  FC = 1
+  FD = 1
+  FE = 0
+  FF = terminator/return
+
+F2:
+Handler $C80D pushes a nested text source. FF in nested source returns to previous source.
+All moved translated targets are rewritten by repack_pool.py.
+
+MAIN DICTIONARY 60-CF
+---------------------
+Original handler $C758 switches to text bank A, advances caller source, increments source-stack
+index $5A, loads pointer0 from $8000/$8001, then scans FF-delimited entries. Index = token-$5F.
+60 and 62 are preserved original control macros:
+  60 = F8 F1 02
+  62 = F8 F1 0A FE F9
+Every other 60-CF slot may be RU BPE.
+
+SECONDARY DICTIONARY D0-EF (v0.8 PATCH)
+---------------------------------------
+Both dispatcher entries D/E point to $C79C. Patched handler repeats the SAME source-stack prologue,
+then maps D0..EF -> synthetic 60..7F and jumps into original scanner at $C76E/$C770.
+Secondary table base: bank A CPU $994A / text-region offset $194A.
+D0 = entry 1, ... EF = entry 32.
+
+The current BPE has 142 rules total and max dependency depth 5.
+
+
+FC v0.8.2:
+  FC arg — conditional nested-text selector / speaker-prefix selector.
+  bit = arg & 7; tested flag = bit(bit) of state byte $37.
+  flag=0: base pointer ID15, entry=(arg>>6)&7.
+  flag=1: base pointer ID16, entry=(arg>>3)&7.
+  Handler $C9E1 executes LDA #$0A / JSR $FEF4 BEFORE reading IDs 15/16,
+  then ORs pointer high byte with $80. Therefore both pointers MUST be
+  bank-A-local offsets < $4000. Global A-D relocation is invalid here.
+  Selected entry is found by scanning consecutive FF-delimited records.
+  Current FC args are 07,15,4E,5C,63; they use only 7 entries total:
+    generic, generic, Takano, Tae, Sakaguchi, Makiko, Megumi.
+  v0.8.2 fixes slab at original $140E-$1432; ID15=$140E, ID16=$1414.
+  v0.8.1 is invalid: it placed the slab at $8859, which $C9E1 aliased
+  to bank-A $0859 and therefore read pointer-table bytes as text.

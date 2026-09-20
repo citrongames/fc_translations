@@ -1,0 +1,58 @@
+﻿v0.8.22: blackjack no-chips loss shared stream localized; user distinct digit 0 installed at direct/password tiles $22/$74; verifier covers both.
+v0.8.21: blackjack/name/numeric D0-D9 fix; all live numeric glyphs repaired; FD worst-case layout check PASS.
+v0.8.19: safe dialogue area: X<30; <=3 drawable rows; punctuation spaces removed; BPE rebuilt; pool remaining 462 bytes; layout checker PASS.
+v0.8.11: input picker synchronized with RU direct glyph semantics; dakuten/handakuten compositor disabled; remaining selectable JP special kana removed.
+
+OKHOTSK RU v0.8.18 — BUILD STATUS
+==============================
+
+Clean JP ROM SHA256:
+d42f3bdea8af5c1303d567e07afdf89d72d014639e8f7b88fc7a10404bec33ba
+
+Current full test ROM SHA256:
+65f518b6931810bb4f1cfa6feff7e6720d18d621fdf49699ea10930d965f861d
+
+Content coverage:
+- 1542 nonempty translated root records / 1553 total root records.
+- 11 untranslated root records are empty FF-only placeholders.
+- 208 shared F2 streams have translations in shared_translations_all.json.
+- 125 live/QA-relevant streams are supplied by shared_translations_full.json.
+- 110 shared streams are reachable from the final Russian payload and stored in ROM; 15 supplied streams are pruned.
+
+Build packing:
+- relocation objects: 1652
+- encoded bytes before sharing: 55469
+- physical stored bytes: 55055
+- fixed FC slab: 37 bytes at bank-A $140E-$1432
+- generic safe pool: 56061
+- generic pool remaining: 1043
+- main dictionary logical: 459/516 bytes
+- secondary D0-EF dictionary: 171 bytes / 32 entries
+- BPE rules: 142
+- max BPE depth: 5
+
+Verification:
+- tests/selftest.py passes on clean ROM.
+- tests/verify_full_rom.py passes on full test ROM.
+- Full ROM rebuilt from this archive is byte-identical to the control build.
+- No final text/F2 stream overlaps the secondary dictionary range.
+- All final F2 targets are valid text-region addresses.
+
+Dialogue layout QA (v0.8.18):
+- runtime save states proved long text spills past X=31 instead of wrapping;
+- exact checker follows F1/F8/F9, FC speaker prefixes and recursive F2 shared streams;
+- 341 roots + 8 shared streams reflowed;
+- 15 previously omitted live shared translations added to strict QA coverage;
+- final result: 0 X-overflows, 0 missing F2 translations and 0 pages above four visible lines;
+- command-menu labels retain 0 overflows above 10 characters.
+
+Runtime fix v0.8.2: FC lookup is a fixed-bank-A structure. ID15=$140E and ID16=$1414; the seven-entry slab stays at $140E-$1432. v0.8.1 is invalid because its slab was allocated at global $8859 and handler $C9E1 actually read bank-A $0859.
+
+Runtime fix v0.8.3: UI arrow tiles $40/$3B restored; ю/я moved to direct slots $2C/$2D.
+
+v0.8.7 runtime QA note:
+- clear hard-coded dakuten overlays at PRG $3CF3F/$3CF57 for translated input prompts;
+- clear popup dakuten overlay cells $05/$10 by restoring clean twins $04/$0F.
+
+
+v0.8.8: wrong-number surname table $0E4E-$0E7F patched to КАТО/САТО/АБЭ/ОДА/АОКИ/ИТО/МОРИ/ХАРА/ОНО/КУБО; 10x5 layout unchanged.

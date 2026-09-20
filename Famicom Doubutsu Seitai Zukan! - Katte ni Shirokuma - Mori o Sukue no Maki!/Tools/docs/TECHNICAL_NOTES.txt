@@ -1,0 +1,98 @@
+KATTE NI SHIROKUMA RU — TECHNICAL NOTES
+==========================================
+
+1. ROM ARCHITECTURE
+-------------------
+Original: 8 x 16 KiB PRG + 16 x 8 KiB CHR, MMC1.
+FINAL:    16 x 16 KiB PRG + 16 x 8 KiB CHR, MMC1.
+
+PRG banks 8..14 were reserved for expanded Russian B1 text.
+Original fixed bank 7 was cloned to expanded fixed bank 15.
+
+2. FAR TEXT
+-----------
+B1 pointer table remains at file $10010, 898 entries.
+Each pointer now resolves to a 4-byte local stub at:
+  file $10714 + index*4
+
+Stub format:
+  54 bank lo hi
+
+$54 is the extension opcode. bank is 8..14; lo/hi are CPU $8000-$BFFF.
+The fixed-bank dispatcher extension begins at CPU $FF79.
+
+3. TEXT BLOCKS
+--------------
+B0 pointer table: file $0C1A6, 153 pointers, pointer delta $4010.
+B1 pointer table: file $10010, 898 pointers, pointer delta $8010.
+D  pointer table: file $17A99, 91 pointers, pointer delta $8010.
+
+B0 final pools:
+  $0C2D8-$0C59C
+  $0FF8D-$0FFCB
+  $0FFF0-$10009
+
+D final pool:
+  $14156-$16A8B
+
+4. IMPORTANT COMPILER/RENDERER TOKENS
+------------------------------------
+$00  terminator
+$89  line break
+$B3  next dialogue page
+$01-$04 portrait/end controls used as {ED}/{FACE02}/{FACE03}/{FACE04}
+
+Dual-purpose B1 dictionary bytes:
+$0D  performs -5 HP, then expands dictionary D:008
+$1E  restores/recalculates HP, then expands D:025
+$47  adds 25 IQ, then expands D:066
+
+Runtime substitutions:
+$11/$45 actor/speaker names
+$5B-$5F battle-time enemy/item/numeric substitutions for B1:813..889
+
+Other effect/service controls include $53/$55, $60-$88, $8A, $B8.
+Deleting an invisible token may change gameplay.
+
+5. ENEMY NAMES
+--------------
+Battle opcode $5B uses RAM $00E5 as enemy index.
+Pointer table: PRG bank 3 CPU $A779, 27 pointers ($A779-$A7AE).
+String pool:   CPU $A7AF-$A880, 210 bytes.
+FINAL usage: 202 bytes, 8 bytes free.
+
+The earlier 16-entry assumption was wrong; indices 16..26 are real late-game
+enemies and were the source of the final untranslated-name bug.
+
+6. ENDING CREDITS
+-----------------
+Fixed data: file $03C02-$03C84 = 131 bytes; file $03C85 = $00 terminator.
+$70 separates credit pages; $89 separates lines. Seven pages are used.
+
+Original ending control flow needs to loop back to CPU $FF6C. The original
+3-byte JMP $FF6C would occupy $FF77-$FF79, but $FF79 is now far-text runtime.
+
+FINAL uses:
+  $FF74  JSR $F4BE
+  $FF77  BEQ $FF6C
+  $FF79  ... far-text runtime ...
+
+$F4BE returns with Z=1 after its DEX/BNE delay loop, so BEQ is deterministic
+and preserves original looping behavior in only 2 bytes.
+
+7. PASSWORD FONT
+----------------
+Password values internally remain digits 0..9. Gameplay output and password
+entry use different CHR areas. The final build synchronizes the display glyphs
+so a generated password and the symbols accepted on the password screen match.
+No password algorithm was changed.
+
+8. HUD COLOR
+------------
+Some HUD locations render foreground using NES color index 3. Russian HUD glyphs
+were corrected by mirroring plane 0 into plane 1 in the required 4 KiB CHR
+subbanks, restoring white text without palette changes.
+
+9. FINAL HASH
+-------------
+SHA-256: 75005f885f4d040dcc1a0e0b521ef12eb5d466815735ebe75a18c17fa33db16b

@@ -1,0 +1,526 @@
+﻿OKHOTSK RU — ДОПОЛНЕНИЕ v0.6
+=============================
+
+- Подтверждена стековая природа dictionary source: handler 60-CF в fixed bank ($C758...)
+  увеличивает $5A и кладёт новый source pointer в $5B/$5C + 2*$5A. Поэтому словарь
+  допускает вложенные tokens.
+- $5B..$6A дают 8 source-pointer slots; $6B/$6C уже используются другими переменными.
+- Текущий BPE для 266 строк: 106 rules, max dependency depth=5.
+- 60=F8 F1 02 и 62=F8 F1 0A FE F9 сохраняются как оригинальные control macros.
+- repack_pool вычисляет свободный pool как ALL reachable streams минус LIVE от
+  непереведённых roots, а не по визуально пустым PRG-байтам.
+- Для текущих 266: reclaimable=2513, known zero padding=30, pool=2543, stored=2526, free=17.
+- Verified padding: text-region $3FBA-$3FD7, ровно 30 нулей; нет pointer/F2 и literal
+  $BFBA/$3FBA reference в PRG. $BFD8 уже реальный следующий блок.
+- Exact duplicate и byte-suffix sharing разрешены для переведённых payload.
+- FB static handler $C9CE читает 1 аргумент и отправляет его как literal glyph через
+  обычный glyph-output path; это не сюжетный branch. Поэтому [FB:$xx] может быть
+  сознательно заменён обычным русским текстом, если вставляемый glyph уже передан словами.
+
+Подробности: docs/BPE_AND_POOL_RU.txt
+
+БАЗА ЗНАНИЙ — Hokkaidou Rensa Satsujin: Okhotsk ni Kiyu (Famicom)
+Версия набора: v0.4
+Дата: 2026-09-18
+
+======================================================================
+1. ИЗУЧЕННАЯ ROM
+======================================================================
+- iNES.
+- PRG: 16 x 16 KiB = 256 KiB.
+- CHR-ROM: 0; используется CHR-RAM.
+- Mapper: 1 / MMC1.
+- SHA256:
+  d42f3bdea8af5c1303d567e07afdf89d72d014639e8f7b88fc7a10404bec33ba
+- Текстовые банки: PRG A-D, логически объединённые в region 0x0000-0xFFFF.
+
+======================================================================
+2. POINTER TABLE
+======================================================================
+- Начало объединённого A-D region = pointer table.
+- Первый word = 0x0C4A.
+- 0x0C4A / 2 = 1573 pointer entries.
+- Little-endian offsets относительно начала bank A.
+- 0xFFFF встречается у 11 entries и означает отсутствие валидного target.
+- ID 0 = 0x0C4A, ID 1 = 0x0E4E используются как границы dictionary block, а не как
+  обычные пользовательские script records.
+- Начиная с ID 2: 1553 уникальных физических pointer roots; некоторые ID являются
+  алиасами одного адреса.
+
+Bank/address conversion:
+  bank = A + (ptr >> 14)
+  CPU  = $8000 + (ptr & $3FFF)
+
+Пример ID 237:
+  ptr 0x142D
+  bank A
+  CPU $942D
+
+======================================================================
+3. DICTIONARY 60-CF
+======================================================================
+- Диапазон 0x0C4A..0x0E4D.
+- 112 entries, разделены FF.
+- token 60 -> entry 0 ... token CF -> entry 111.
+
+Главное уточнение v0.4:
+DICTIONARY ENTRY — ЭТО BYTECODE MACRO, А НЕ ОБЯЗАТЕЛЬНО ПРОСТАЯ СТРОКА.
+
+Примеры:
+  60 = F8 F1 02
+  62 = F8 F1 0A FE F9
+  63 = E2 54 08 = ボス
+  64 = 03 2B 02 3A = くろき「
+  73 = に + space
+  78 = が + space
+  8D = おとこ
+  92 = したい
+  B4 = とうきょう
+  B5 = はるみふとう
+
+Поэтому v0.4 decoder исполняет F-controls внутри macro.
+
+======================================================================
+4. ГЛИФЫ / ЯПОНСКИЕ КОДЫ
+======================================================================
+- 00 = space.
+- 01-3F — direct glyph range (не все позиции окончательно названы).
+- 40-5F — voiced/semi-voiced kana logic; отдельные готовые が/ぱ tiles в font нет.
+- Dakuten/handakuten рисуются служебными tiles 7E/7F поверх базовой kana.
+- 60-CF = dictionary macros.
+- D0-DF = extra direct glyph family; handler вычисляет дополнительный glyph.
+- E0-EF = glyph-set shift counter.
+- F0-FF = controls.
+
+Подтверждено по save-state nametable:
+  tile 7E = dakuten
+  tile 7F = handakuten
+
+======================================================================
+5. E1-EF: KATAKANA В JP / LOWERCASE В RU
+======================================================================
+Fixed-bank code:
+CPU $C7AF:
+  TXA
+  AND #$0F
+  STA $55
+  JSR $C69A
+  RTS
+
+CPU $C6C5:
+  если $55 != 0:
+    DEC $55
+    если glyph != 0 и glyph < $33:
+      glyph += $40
+
+Следствие:
+- E1 = следующий 1 glyph output из +40 набора;
+- ...
+- EF = следующие 15;
+- E0 = length 0.
+
+Счётчик относится к glyph output, а не тупо к N raw bytes: dictionary macro может
+порождать glyphs, controls сами не являются обычными glyphs.
+
+В оригинале так получается katakana.
+В RU font +40 — это нижний регистр.
+
+======================================================================
+6. РУССКИЙ ШРИФТ
+======================================================================
+assets/font_ru.png / assets/font_ru.bin
+Raw size: 0x800 bytes = 128 NES 2bpp tiles.
+
+Пользовательская раскладка:
+  00 = space
+  01-21 hex (decimal 1-33) = А-Я, включая Ё после Е
+  3E = ,
+  3F = .
+  41-61 hex (decimal 65-97) = а-я
+
+Изменены ровно:
+  01..21, 3E, 3F, 41..61
+
+Русский text encoder:
+- uppercase -> direct 01..21;
+- lowercase -> E1..EF + base 01..21;
+- run >15 автоматически режется.
+
+Поддерживаем существующие неизменённые знаки:
+  33 = - / —
+  35 = !
+  36 = ?
+  3D = …
+  3E = ,
+  3F = .
+
+======================================================================
+7. FONT RLE В BANK 0
+======================================================================
+- Статический text font raw = 0x800 bytes.
+- Compressed stream starts PRG bank0 offset 0x001C.
+- Следующий графический stream начинается строго с PRG offset 0x04F3.
+- Значит первый compressed stream обязан занимать РОВНО:
+  0x04F3 - 0x001C = 1239 bytes.
+
+RLE:
+- 01..7F = N literal bytes follow;
+- 81..FF = repeat next byte (control & 0x7F) times.
+
+Оригинальный recompress = 1239 bytes.
+Текущий RU recompress = 1106 bytes (после добавления ":" в tile $3A), но его нельзя просто записать короче.
+font_insert.py использует encode_exact_length() и создаёт эквивалентный 1239-byte stream.
+
+Runtime history:
+- v0.2 записал короткий stream -> русский диалог был виден, но часть символов input screen
+  имени/пароля пропала.
+- v0.3 exact 1239 -> пользователь подтвердил: input screen снова полностью работает.
+
+======================================================================
+8. F-CONTROL DISPATCH
+======================================================================
+High-nibble dispatcher table CPU $C640:
+  0-3 -> $C736
+  4-5 -> $C743
+  6-C -> $C758
+  D   -> $C79C
+  E   -> $C7AF
+  F   -> $C7B8
+
+F table CPU $C7C6:
+  F0 $C7E6
+  F1 $C7FE
+  F2 $C80D
+  F3 $C82B
+  F4 $C83F
+  F5 $C86A
+  F6 $C87E
+  F7 $C88A
+  F8 $C892
+  F9 $C89A
+  FA $C8F5
+  FB $C9CE
+  FC $C9E1
+  FD $CA42
+  FE $CA6C
+  FF $CA8C
+
+Inline lengths:
+  F0 variable until arg bit7=1 inclusive
+  F1 1
+  F2 2
+  F3 0
+  F4 0
+  F5 2
+  F6 1
+  F7 0
+  F8 0
+  F9 0
+  FA 0
+  FB 1
+  FC 1
+  FD 1
+  FE 0
+  FF terminator/return
+
+======================================================================
+9. F2 — ВЛОЖЕННЫЙ TEXT SOURCE
+======================================================================
+CPU $C80D показывает точную механику:
+- advance past F2;
+- read byte1;
+- read byte2;
+- push/increment source stack index;
+- byte1 -> low address;
+- byte2 -> high address;
+- вложенный source исполняется до FF;
+- FF handler $CA8C возвращает source stack назад.
+
+То есть:
+  F2 09 13
+= nested stream at region $1309.
+
+Пример:
+ID 6 ptr $1303:
+  64 F2 09 13 FF
+= speaker token 64 + общий suffix начиная $1309.
+
+v0.4 F2 graph:
+- 1553 unique pointer roots (ID>=2);
+- после рекурсивного обхода F2 reachable = 1746 streams;
+- 193 из них не имеют собственного pointer-table ID.
+
+Это объяснило старые "gaps": многие куски текста физически существуют без прямого ID.
+
+======================================================================
+10. ПЕРВЫЙ ТЕКСТ
+======================================================================
+ID 237:
+ptr $142D
+len 57 bytes including FF
+
+Raw:
+00 B4 2C 2E 00 B5 73 8D 1E F8
+92 78 15 41 2F 0B 0F 76 07 27 09 2D 17 04 0B 00 15 1A 0B 10 F8
+E2 52 01 1E 03 2B 02 2D 0D 2A 00 44 2E 50 73 01 04 0D 04 0B 1E 4B 2F 0B 3F FF
+
+Decoded:
+ とうきょうわん はるみふとうに おとこの
+したいが あがったとの しらせをうけた あなたは
+ブカのくろきをつれ げんばに かけつけたのだった。
+
+Smoke RU:
+Тест русского шрифта.
+Ёжик съел хлеб.
+= 44 bytes incl. FF.
+
+v0.4 build smoke ROM получается побайтово тем же, что проверенный v0.3 smoke ROM:
+SHA256 a5029a2107a008e96c3ec29676ab744d4227a425eba2323935f18c2909726430
+
+======================================================================
+11. UI COMMAND IDS
+======================================================================
+Основные command labels:
+ID17 ばしょいどう
+ID18 あたりを みろ
+ID19 ひとに きけ
+ID20 ひと しらべろ
+ID21 ひとに みせろ
+ID22 ひと さがせ
+ID23 だれか よべ
+ID24 なにか しらべろ
+ID25 なにか とれ
+ID26 しゃしんとれ
+ID27 もちものみろ
+ID28 でんわ かけろ
+ID29 そうさメモ
+
+По UI скриншотам пользователь оценивает максимум команды примерно в 10 символов.
+check_script.py применяет default menu-width=10 к ID17-29.
+
+После удаления control markers самая длинная строка во всём оригинальном dump = 27
+видимых JP characters. check_script использует 27 как эмпирический warning threshold,
+не как доказанный аппаратный предел.
+
+======================================================================
+12. REPACKER v0.4: ЧТО ОН ГАРАНТИРУЕТ
+======================================================================
+Причина осторожности:
+A-D region почти полностью занят реальными текстовыми/dynamic data. Байтовые интервалы
+между pointer roots нельзя объявлять свободными: F2 и другие runtime mechanisms могут
+заходить туда.
+
+Поэтому v0.4 НЕ ищет "пустой хвост" и НЕ расширяет PRG.
+
+Алгоритм:
+- payload <= original physical record -> in-place;
+- overflow -> разрешена перераскладка только contiguous group переведённых records;
+- record должен иметь RELOC=YES: внутрь его physical bytes не начинается другой pointer
+  или известный F2 target;
+- суммарный new size группы <= суммарной original capacity;
+- pointer table переписывается;
+- известные F2 start references на moved records переписываются.
+
+Тест repacker-а в наборе:
+examples/repack_relocation_test.txt
+- ID17 искусственно увеличивается 5 -> 6 bytes;
+- ID18 сокращается 5 -> 2;
+- суммарная capacity 10, need 8;
+- ID18 переносится $0E8D -> $0E8E;
+- post-build parser подтверждает обе записи.
+
+Ограничение:
+неизвестные ещё runtime-ссылки, которые не являются pointer/F2, теоретически возможны.
+Поэтому каждая реальная relocation-сборка должна проходить emulator QA. Repacker
+специально не двигает untranslated records.
+
+======================================================================
+13. FCEUX .fc0
+======================================================================
+- header FCSX;
+- для проверенного save zlib payload с +0x10;
+- chunks: TAG + uint32 LE size + payload;
+- найдено RAM, NTAR, PRAM, CHRR, WRAM.
+
+Это дало runtime evidence по nametable/CHR-RAM и dakuten composition.
+
+======================================================================
+14. ДОКУМЕНТАЦИОННОЕ ПРАВИЛО
+======================================================================
+- Runtime/static подтверждённое пишем как факт.
+- Пользовательский смысл неизвестного control code не выдумываем.
+- Адреса/размеры/хэши фиксируем в KNOWLEDGE_BASE.
+- На каждой стабильной контрольной точке собираем полный zip, чтобы проект можно было
+  воспроизвести без истории чата.
+
+
+=== v0.7: ПЕРЕВОД SHARED F2 STREAMS ===
+
+Проблема v0.6:
+Многие pointer-root записи имеют длину всего 4-15 байт и через F2 вызывают большие общие
+потоки. Если русский expanded-текст целиком вставлять в root, один и тот же общий фрагмент
+дублируется десятки раз. Например первые дырки Харуми давали сотни лишних байт.
+
+Решение v0.7:
+- shared_translations.py читает JSON вида {"1535":"Куроки: ...", "E7BB":"..."};
+- repack_pool.py объединяет translated pointer roots и translated shared targets в один набор
+  relocation objects;
+- live traversal от непереведённых pointer roots останавливается на любом translated object;
+- old->new mapping включает и roots, и shared streams;
+- pointer table меняется только для translated roots;
+- F2 внутри новых payload автоматически патчится по old->new mapping;
+- F2 в остающихся live old streams тоже перенаправляется, если его target переведён и перенесён;
+- post-build verifier читает каждый root/shared payload по новому адресу и сравнивает байты.
+
+Контрольная ветка Харуми:
+275 root translations + 20 shared translations = 295 relocation objects.
+Safe pool 3084 bytes, stored 3080 bytes, 4 bytes remain.
+
+ВАЖНО:
+Shared translation должна быть семантически корректна во ВСЕХ местах, которые ссылаются на
+этот original target. Нельзя переводить target контекстно, если один и тот же target означает
+разные вещи в разных ветках.
+
+BPE:
+build_ru_bpe.py получил --shared-translations и включает русские shared streams в corpus.
+Это важно: иначе часто повторяющиеся имена/служебные реплики shared-слоя не влияют на выбор
+BPE rules.
+
+=== v0.8 FULL-RU / EXTENDED DICTIONARY ===
+- Содержательные root texts: 1542; пустые FF roots: 11.
+- Все 193 original shared F2 streams имеют русский перевод; в финальном payload реально
+  нужны 110, остальные pruning-ятся по reachability новых F2 calls.
+- Русский direct layout v0.8.3: 01-21 А-Я; 41-5F а-э; 2C ю; 2D я; 22-2B цифры 0-9; 40/3B сохранены как UI-стрелки.
+- D0-EF больше НЕ glyph/shift: patched dispatcher отправляет оба high-nibble класса в
+  secondary dictionary handler $C79C.
+- Handler $C79C полностью помещается в бывшие D+E handlers ($C79C-$C7B7, 28 bytes).
+- Secondary base = bank A CPU $994A (text offset $194A).
+- Handler prologue обязательно выполняет JSR $FEF4, JSR $C69A, INC $5A перед scanner.
+- Current BPE: 142 rules, max nested depth 5; main dict logical 459/516 bytes;
+  secondary 171 bytes / 32 entries.
+- v0.8.2 generic relocated text: 54656 bytes in 56061-byte generic pool, spare 1405 bytes; FC slab 37 bytes fixed at $140E.
+- Final control ROM SHA256 (v0.8.2 FC bank-A fix): 485d5b00eaa9931ad06617a2bdaa209824fb476a260c53427891ce9e383a1e7e
+- Special non-root range $0E4E-$0E7F = таблица случайных фамилий посторонних
+  абонентов при неверном телефонном номере. Она не участвует в сюжете и не требует
+  запоминания. Формат fixed-slot: 50 bytes = 10 x 5, максимум 4 русских глифа + FF.
+- v0.8.8 patch_phone_names_ru.py заменяет её на короткие японские фамилии:
+  КАТО / САТО / АБЭ / ОДА / АОКИ / ИТО / МОРИ / ХАРА / ОНО / КУБО.
+  САТО и ИТО сохраняют оригинальные фамилии; остальные заменены на реальные короткие
+  японские фамилии, потому что буквальная транслитерация не помещается.
+
+
+======================================================================
+10. FC — CONDITIONAL TEXT LOOKUP (v0.8.2)
+======================================================================
+Handler CPU $C9E1 разобран полностью. FC имеет один аргумент A:
+
+  bit = A & 7
+  flag = ($37 >> bit) & 1
+
+Если flag=0:
+  base = pointer-table ID15 (ROM table word at CPU $801E)
+  index = (A >> 6) & 7
+
+Если flag=1:
+  base = pointer-table ID16 (ROM table word at CPU $8020)
+  index = (A >> 3) & 7
+
+КРИТИЧЕСКАЯ ДЕТАЛЬ: до чтения pointer-table handler выполняет:
+
+  LDA #$0A
+  JSR $FEF4
+
+то есть жёстко включает PRG bank A. Затем high byte выбранного pointer OR-ится
+с $80 и используется как CPU $8000-$BFFF address. Следовательно ID15/ID16
+должны содержать BANK-A-LOCAL offsets $0000-$3FFF. Обычный global text-region
+offset (например $8859 из bank C) здесь НЕ работает: $C9E1 прочитает bank A
+CPU $8859 = local $0859. Именно это было причиной полного мусора в v0.8.1.
+
+Далее handler сканирует index штук FF-delimited records подряд от base и пушит
+выбранный record как новый text source. В изученной ROM встречаются только:
+
+  FC $07: generic / Такано
+  FC $15: generic / Сакагути
+  FC $4E: generic / Таэ
+  FC $5C: generic / Макико
+  FC $63: generic / Мэгуми
+
+Поэтому реально нужны 7 общих consecutive entries:
+  entry0 = generic *:
+  entry1 = generic *:
+  entry2 = Такано:
+  entry3 = Таэ:
+  entry4 = Сакагути:
+  entry5 = Макико:
+  entry6 = Мэгуми:
+
+v0.8.2 сохраняет slab на исходном bank-A base $140E. ID15=$140E, ID16=$1414
+(entry2). Переведённый slab занимает $140E-$1432. ID237/238/239 не входят
+в необходимый FC lookup для реально встречающихся аргументов и repack-ятся
+как обычные root records. verify_full_rom.py эмулирует вычисление index и
+FF-scan для каждого найденного FC arg при flag=0 и flag=1.
+
+
+11. v0.8.3 — UI ARROW TILE FIX
+--------------------------------
+Пользователь runtime-тестом обнаружил, что tiles $40/$3B являются не свободными
+символами, а штатными стрелками вправо/вниз. v0.8-v0.8.2 ошибочно копировали туда
+ю/я. Исправление: стрелки восстановлены из legacy font; ю/я зеркалируются из
+исходных пользовательских glyph tiles $60/$61 в обычные kana slots $2C/$2D.
+Scenario encoding: ю=$2C, я=$2D. Это сохраняет one-byte русский текст и не требует
+терять secondary BPE tokens D0-EF. tests/selftest.py и verify_full_rom.py теперь
+явно проверяют, что tiles $40/$3B побайтово совпадают с legacy font.
+
+
+FC И ШИРИНА СТРОК (v0.8.4)
+--------------------------
+[FC:$xx] имеет нулевую длину в исходнике, но НЕ нулевую видимую ширину: handler
+вставляет имя/префикс говорящего перед продолжением той же экранной строки.
+Для layout QA нужно прибавлять максимум из двух возможных FC entries:
+  FC:$07 -> 7  (Такано:)
+  FC:$15 -> 9  (Сакагути:)
+  FC:$4E -> 4  (Таэ:)
+  FC:$5C -> 7  (Макико:)
+  FC:$63 -> 7  (Мэгуми:)
+Это особенно важно для первой строки shared stream.
+
+
+STATIC RAW-TILE UI (v0.8.5)
+----------------------------
+Не весь текст игры проходит через scenario codec. Fixed-bank UI содержит raw font
+tile arrays по PRG offsets $3CF69/$3CF75/$3D5A3, а navigation table продублирована
+по $23E3F/$33E3F. См. docs/STATIC_UI_RU.txt и tools/patch_static_ui_ru.py.
+Именно поэтому эти Japanese строки сохранялись даже после перевода 1542 roots +
+всех shared F2 streams.
+
+
+======================================================================
+STATIC UI ADDENDUM v0.8.6
+======================================================================
+- Navigation table $23E3F/$33E3F must preserve 3 tiles + 3 spaces + 3 tiles; cursor X is fixed.
+  Correct RU: НАЗ   КОН / ДАЛ. Do not use a >3-tile second choice without patching cursor logic.
+- Wrong-password popup is NOT scenario text. It is sprite graphics stream:
+  header PRG $04F3, PackBits payload PRG $04F7-$062E ($138 bytes), unpacked $190 bytes.
+- Popup text cells use tiles 08-0D and 11,0D,12-15. Tile 0D is shared.
+  RU wording ОШИБКА / ПАРОЛЯ intentionally shares А at that tile.
+- Popup glyphs use main-font plane0 shape and opaque plane1 = bitwise NOT(plane0).
+- Repack popup to EXACT $138 bytes: next graphics stream follows immediately.
+
+
+v0.8.7 DAKUTEN CLEANUP
+----------------------
+- Static input prompt descriptors independently draw dakuten tile $7E at PRG $3CF3F/$3CF57 for original だ in ください. Russian prompts must set these bytes to $00.
+- Wrong-password popup's two が do not keep dakuten inside shared glyph tile $0D. Overlay pixels live in tile $05 (top border + mark) and $10 (middle blank + mark). Clean replacements are $04 and $0F respectively.
+
+
+v0.8.11 INPUT PICKER DIRECT-RU FIX
+---------------------------------
+- Fixed-bank CPU $CB0A (PRG $3CB0A) был отдельным JP compositor-ом picker-а.
+- JP bytes 41-54: base = code-$40, overlay tile 7E (dakuten).
+- JP bytes 55-59: base = code-$45, overlay tile 7F (handakuten).
+- RU v0.8.11 bypasses this conversion, so the picker renders the same direct
+  codes 41-5F as the normal Russian text renderer (lowercase а-э).
+- Picker table copies at PRG $23DF9/$33DF9 reorder the preserved password code
+  set 2C/2D/2E to visual э/ю/я; font tile 2E mirrors lowercase э (tile 5F).
+- Name-only special row at PRG $23E35/$33E35 uses 5A-5E = ш/щ/ъ/ы/ь.
+- Password code set itself is unchanged.
